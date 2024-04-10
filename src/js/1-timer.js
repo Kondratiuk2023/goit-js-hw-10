@@ -45,10 +45,19 @@ const options = {
 
 flatpickr(input, options);
 
-function onClickStartTimer() {
+function onClickStartTimer(selectedDate) {
   intervalId = setInterval(calculateTimeLeft, 1000);
-  startBtn.disabled = false;
+  startBtn.disabled = true;
   input.disabled = true;
+    
+  const currentDateTime = new Date();
+    if (selectedDate <= currentDateTime) {
+        console.log("Обрана дата повинна бути в майбутньому.");
+        // Додаткові дії, якщо потрібно
+    } else {
+        // Запуск таймера
+        // ...
+    } 
 }
 
 function updateClockface(ms) {
@@ -64,7 +73,6 @@ function updateClockface(ms) {
   timerMinutes.textContent = addLeadingZero(minutes);
   timerSeconds.textContent = addLeadingZero(seconds);
 }
-
 
 function calculateTimeLeft() {
   const currentDate = new Date().getTime();
